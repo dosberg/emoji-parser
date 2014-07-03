@@ -1,5 +1,12 @@
 # emoji-parser for node.js
 
+## About
+
+This script makes it easy to keep the emoji-images in sync with the [official repository](https://github.com/arvida/emoji-cheat-sheet.com) of [emoji-cheat-sheet.com](http://www.emoji-cheat-sheet.com/).
+It's just an additional call on server-startup (or whenever you want to synchronize).
+
+The actual parsing works without any DOM-manipulation or whatever, just a simple replace call.
+
 ## Usage
 
     emoji = require('emoji-parser');
