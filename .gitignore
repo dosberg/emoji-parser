@@ -1,0 +1,7 @@
+.idea
+.tmp
+lib/emoji
+test
+node_modules
+dist
+*.iml
