@@ -7,6 +7,14 @@ It's just an additional call on server-startup (or whenever you want to synchron
 
 The actual parsing works without any DOM-manipulation or whatever, just a simple replace call.
 
+## Why another one?
+
+This project is inspired by [emoji-images](https://github.com/HenrikJoreteg/emoji-images), but this project hasn't been modified for some time now and the author isn't responding to issues.
+
+Because of this and a few more customizations I rewrote this in coffee-script which is much more fun to code :smile:.
+
+So this has become way more customizable (up to passing own parser-function) and the emoji-synchronization happens server-side instead of project-side.
+
 ## Usage
 
     emoji = require('emoji-parser');
