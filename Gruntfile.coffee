@@ -7,7 +7,7 @@ module.exports = (grunt) ->
       tmpCoffee: [".tmp/**/*.coffee"]
     copy:
       package:
-        src: 'package.json'
+        src: ['package.json', 'LICENSE.md', 'README.md']
         dest: 'dist/'
       tmp:
         expand: true
