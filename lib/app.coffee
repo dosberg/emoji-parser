@@ -22,6 +22,8 @@ service.update = (remain, cb) ->
   if typeof remain == 'function'
     cb = remain
     remain = true
+  else
+    remain = remain != false
   if dirName?
     update.call this, dirName, remain, (err, list) ->
       save emoji = service.emoji = list if list? && list instanceof Array
