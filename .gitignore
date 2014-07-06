@@ -1,6 +1,7 @@
-.idea
-.tmp
-node_modules
-dist
+.idea/
+.tmp/
+node_modules/
+dist/
+emoji/
+bower_repo/
 *.iml
-emoji

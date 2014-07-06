@@ -5,6 +5,7 @@ module.exports = (grunt) ->
       all: [".tmp", "dist"]
       tmp: [".tmp"]
       tmpCoffee: [".tmp/**/*.coffee"]
+      bower: ["bower_repo/emoji", "bower_repo/**/*.js"]
     copy:
       tmp:
         expand: true
@@ -23,10 +24,10 @@ module.exports = (grunt) ->
         dest: 'dist/npm/'
       bower:
         src: ".tmp/parse.js"
-        dest: "dist/bower/main.js"
+        dest: "bower_repo/main.js"
       bowerPackage:
-        src: ['bower.json', 'LICENSE.md', 'README.md', 'emoji/*']
-        dest: 'dist/bower/'
+        src: ['emoji/*']
+        dest: 'bower_repo/'
     coffee:
       tmp:
         options:
@@ -54,6 +55,6 @@ module.exports = (grunt) ->
 
   grunt.registerTask "dist", ["copy:tmp", "coffee:tmp", "clean:tmpCoffee", "uglify:tmp",
                               "copy:npm", "copy:npmPackage",
-                              "copy:bower", "copy:bowerPackage",
+                              "clean:bower", "copy:bower", "copy:bowerPackage",
                               "clean:tmp"]
   grunt.registerTask "default", ["dist"]

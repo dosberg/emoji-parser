@@ -17,12 +17,13 @@ So this has become way more customizable (up to passing own parser-function) and
 
 ## Usage
 
-    emoji = require('emoji-parser');
+    var emoji = require('emoji-parser');
     
-    emoji.init(/* You may pass a directory-name to save the images there */); /* needs to get called once */
-    
+    // next two calls will keep your emoji (within the given directory) in sync with the official repository
+    emoji.init(/* You may pass a directory-name to save the images there */); /* needs to get called before update */
     emoji.update(/* keep saved files (default: true) , callback */); /* will update your images, preferred: call while server-startup */
     
+    // The actual parsing may be run at any time:
     emoji.parse('This is a :telephone:', 'http://example.com/emoji/images', {
       classes: "emoji someclass", /* default: "emoji" */
       attributes: {
@@ -36,6 +37,11 @@ So this has become way more customizable (up to passing own parser-function) and
 If you pass a function instead of an object this function gets called for every replacement with the name of the emoji
 to parse. The return-value will get inserted.
 
+With `emoji.emoji` you can retrieve the current list of emoji that are ensured to be on your file-system.
+`emoji.list()` instead returns the list of emoji that gets used within the parse-function.
+The difference between those two is that `emoji.list()` even returns an array when `init` didn't get called therefor the
+`init` and `update` methods are optional.
+
 ## Installation
 
-`npm install emoji-parse`
+`npm install emoji-parser`
