@@ -2,38 +2,34 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     clean:
-      all: [".tmp", "dist"]
-      tmp: [".tmp"]
-      tmpCoffee: [".tmp/**/*.coffee"]
-      bower: ["bower_repo/emoji", "bower_repo/**/*.js"]
+      all: [".tmp", ".tmp_min", "npm_module", "bower_module/emoji", "bower_module/**/*.js"]
+      tmp: [".tmp", ".tmp_min"]
+      bower: ["bower_module/emoji", "bower_module/**/*.js"]
     copy:
-      tmp:
-        expand: true
-        cwd: "lib/"
-        src: "**"
-        dest: ".tmp/"
-        dot: true
       npm:
         expand: true
-        cwd: ".tmp/"
+        cwd: ".tmp_min/"
         src: "**"
-        dest: "dist/npm/"
+        dest: "npm_module/"
         dot: true
       npmPackage:
         src: ['package.json', 'LICENSE.md', 'README.md']
-        dest: 'dist/npm/'
+        dest: 'npm_module/'
       bower:
         src: ".tmp/parse.js"
-        dest: "bower_repo/main.js"
+        dest: "bower_module/main.js"
+      bowerMin:
+        src: ".tmp_min/parse.js"
+        dest: "bower_module/main.min.js"
       bowerPackage:
         src: ['emoji/*']
-        dest: 'bower_repo/'
+        dest: 'bower_module/'
     coffee:
       tmp:
         options:
           bare: true
         expand: true
-        cwd: ".tmp/"
+        cwd: "lib/"
         src: ["**/*.coffee"]
         dest: ".tmp/"
         ext: ".js"
@@ -45,7 +41,7 @@ module.exports = (grunt) ->
           expand: true
           cwd: ".tmp/"
           src: "**/*.js"
-          dest: ".tmp/"
+          dest: ".tmp_min/"
         ]
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -53,8 +49,10 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
-  grunt.registerTask "dist", ["copy:tmp", "coffee:tmp", "clean:tmpCoffee", "uglify:tmp",
-                              "copy:npm", "copy:npmPackage",
-                              "clean:bower", "copy:bower", "copy:bowerPackage",
-                              "clean:tmp"]
+  grunt.registerTask "dist", [
+    "coffee:tmp", "uglify:tmp", # compile
+    "copy:npm", "copy:npmPackage", # copy NPM module
+    "clean:bower", "copy:bower", "copy:bowerMin", "copy:bowerPackage", # copy Bower module
+    "clean:tmp" # clean
+  ]
   grunt.registerTask "default", ["dist"]
