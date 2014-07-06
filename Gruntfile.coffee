@@ -6,21 +6,27 @@ module.exports = (grunt) ->
       tmp: [".tmp"]
       tmpCoffee: [".tmp/**/*.coffee"]
     copy:
-      package:
-        src: ['package.json', 'LICENSE.md', 'README.md']
-        dest: 'dist/'
       tmp:
         expand: true
         cwd: "lib/"
         src: "**"
         dest: ".tmp/"
         dot: true
-      dist:
+      npm:
         expand: true
         cwd: ".tmp/"
         src: "**"
-        dest: "dist/"
+        dest: "dist/npm/"
         dot: true
+      npmPackage:
+        src: ['package.json', 'LICENSE.md', 'README.md']
+        dest: 'dist/npm/'
+      bower:
+        src: ".tmp/parse.js"
+        dest: "dist/bower/main.js"
+      bowerPackage:
+        src: ['bower.json', 'LICENSE.md', 'README.md', 'emoji/*']
+        dest: 'dist/bower/'
     coffee:
       tmp:
         options:
@@ -46,5 +52,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
 
-  grunt.registerTask "dist", ["copy:tmp", "coffee:tmp", "clean:tmpCoffee", "uglify:tmp", "copy:dist", "copy:package", "clean:tmp"]
+  grunt.registerTask "dist", ["copy:tmp", "coffee:tmp", "clean:tmpCoffee", "uglify:tmp",
+                              "copy:npm", "copy:npmPackage",
+                              "copy:bower", "copy:bowerPackage",
+                              "clean:tmp"]
   grunt.registerTask "default", ["dist"]

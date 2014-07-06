@@ -11,5 +11,6 @@ if tests.length
     return if !test
     console.info "-----------\nTEST: #{test}"
     require("./#{test}")?.start ->
+      console.info "succeeded."
       trigger tests[++i]
   trigger tests[i]

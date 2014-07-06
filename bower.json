@@ -1,3 +1,19 @@
 {
-
+  "name": "emoji-parser",
+  "license": "MIT",
+  "description": "Emoji Parser for javascript based on www.Emoji-Cheat-Sheet.com",
+  "version": "0.0.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/"
+  },
+  "main": "main.js",
+  "keywords": ["emoji", "parser", "smileys"],
+  "authors": [
+    {
+      "name": "FrissDieGurke",
+      "email": "frissdiegurke@hotmail.com",
+      "homepage": "https://github.com/frissdiegurke/"
+    }
+  ]
 }

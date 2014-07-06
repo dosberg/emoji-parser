@@ -1,6 +1,5 @@
 .idea
 .tmp
-test
 node_modules
 dist
 *.iml
