@@ -90,10 +90,12 @@ If you use `require.js` or similar frameworks you can use it to get the module, 
 
 A parser is just a function that gets called for each emoji-occurrence with the following parameters:
 
- * `[String] name` - The name of the emoji to parse.
- * `[String] url` - The base-URL that got passed to `emojiParser.parse`-function.
- * `[String] classes` - The classes the `img`-tag should use.
- * `[Object] options` - The options that get used by the `emojiParser.parse`-function.
+ 1. `[String] name` - The name of the emoji to parse.
+ 2. `[String] url` - The base-URL that got passed to `emojiParser.parse`-function.
+ 3. `[String] classes` - The classes the `img`-tag should use.
+ 4. `[Object] options` - The options that get used by the `emojiParser.parse`-function.
+
+The return-value will replace the emoji-occurrence.
 
 ### Example
 
