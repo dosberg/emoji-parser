@@ -45,7 +45,7 @@ So this has become way more customizable (up to passing own parser-function) and
    + `url` - The base-url where the clients find the images (without trailing `/`).
    + `options` (default: `{}`) - The options to use for parsing:
      * `list`: A list of emoji to overwrite default one.
-     * `parser`: A Parser ([see below](#Parser)) to replace the default parser.
+     * `parser`: A Parser ([see below](#parser)) to replace the default parser.
      * `classes`: A String of the content for the `class`-attribute of the `img`-tag (with default parser).
      * `attributes` (default: `{'title':function(name){return name;}, 'alt':function(name){return ':'+name+':';}}`): An object of attributes and their values to add to the `img`-tag (with default parser).
    + Returns the text with parsed emoji.
@@ -53,7 +53,7 @@ So this has become way more customizable (up to passing own parser-function) and
  * `[String] emojiParser.parse(text, url, parser)` replaces all emoji-occurrences within given text, using given parser.
    + `text` - The text to parse.
    + `url` - The base-URL to pass to the parser (without trailing `/`).
-   + `parser` - The Parser ([see below](#Parser)) to use.
+   + `parser` - The Parser ([see below](#parser)) to use.
    + Returns the text with parsed emoji.
 
  * `[Array of Strings] emojiParser.list([newList])` - Getter and/or Setter for the list of available images.
@@ -71,7 +71,7 @@ If you use `require.js` or similar frameworks you can use it to get the module, 
    + `url` - The base-url where the clients find the images (without trailing `/`).
    + `options` (default: `{}`) - The options to use for parsing:
      * `list`: A list of emoji to overwrite default one.
-     * `parser`: A Parser ([see below](#Parser)) to replace the default parser.
+     * `parser`: A Parser ([see below](#parser)) to replace the default parser.
      * `classes`: A String of the content for the `class`-attribute of the `img`-tag (with default parser).
      * `attributes` (default: `{'title':function(name){return name;}, 'alt':function(name){return ':'+name+':';}}`): An object of attributes and their values to add to the `img`-tag (with default parser).
    + Returns the text with parsed emoji.
@@ -79,7 +79,7 @@ If you use `require.js` or similar frameworks you can use it to get the module, 
  * `[String] emojiParser(text, url, parser)` replaces all emoji-occurrences within given text, using given parser.
    + `text` - The text to parse.
    + `url` - The base-URL to pass to the parser (without trailing `/`).
-   + `parser` - The Parser ([see below](#Parser)) to use.
+   + `parser` - The Parser ([see below](#parser)) to use.
    + Returns the text with parsed emoji.
 
  * `[Array of Strings] emojiParser.list([newList])` - Getter and/or Setter for the list of available images.
