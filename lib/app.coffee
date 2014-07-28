@@ -17,14 +17,21 @@ service.init = (dir = dirName || require('path').dirname(module.filename) + '/em
 
 save = (cb) -> fs.writeFile "#{dirName}/!index.list", JSON.stringify(emoji), cb
 
-service.update = (remain, cb) ->
-  if typeof remain == 'function'
+service.update = (remain, token, cb) ->
+  if typeof token == 'function'
+    cb = token
+    token = null
+  else if typeof remain == 'function'
     cb = remain
+    remain = true
+    token = null
+  if typeof remain == 'string'
+    token = remain
     remain = true
   else
     remain = remain != false
   if dirName?
-    update.call this, dirName, remain, (err, list) ->
+    update.call this, dirName, remain, token, (err, list) ->
       if list? && list instanceof Array
         emoji = service.emoji = list
         save -> cb?.call?(service, err, list)

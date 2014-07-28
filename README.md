@@ -36,8 +36,9 @@ So this has become way more customizable (up to passing own parser-function) and
  * `emojiParser.init([directory])` initializes the module.
    + `directory` (default: `module-path + '/emoji'`) - The file-system path of the directory where to store the images (without trailing `/`).
 
- * `emojiParser.update([remain], [callback])` downloads missing emoji images to keep your images up-to-date.
+ * `emojiParser.update([remain], [token], [callback])` downloads missing emoji images to keep your images up-to-date.
    + `remain` (default: `true`) - If false the directory gets cleared before downloading all images. Otherwise only images get loaded that don't already exist.
+   + `token` (default: null) - If set it will get used as GitHub access_token.
    + `callback` (default: `null`) - Function that gets called after update is complete.
 
  * `[String] emojiParser.parse(text, url, [options])` replaces all emoji-occurrences within given text.

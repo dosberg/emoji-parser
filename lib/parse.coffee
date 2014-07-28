@@ -22,7 +22,7 @@ getList = (list) -> _list = list || _list || ["+1","-1","100","1234","8ball","a"
   else
     # Global variables
     root.emojiParser = factory()
-) window, ->
+) this, ->
   service = (text, url, options = {}) ->
     list = getList options.list
     parser = null

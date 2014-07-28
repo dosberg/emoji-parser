@@ -27,6 +27,9 @@ fetchImage = (target, path, name, cb) ->
     req.end()
 
 fetchImages = (target, images, cb) ->
+  if images.message?
+    console.error "emoji-parser: GitHub: " + images.message
+    return cb []
   amount = images.length
   list = []
   done = (name) ->
@@ -34,13 +37,16 @@ fetchImages = (target, images, cb) ->
     cb list if !--amount
   fetchImage target, image.path, image.name, done for image in images
 
-module.exports = (dir, remain, cb) ->
+module.exports = (dir, remain, token, cb) ->
+  if typeof token == 'function'
+    cb = token
+    token = null
   dir += '/' if dir[dir.length - 1] != '/'
   wrench.rmdirSyncRecursive dir, true if !remain
   wrench.mkdirSyncRecursive dir
   req = https.get
     hostname: 'api.github.com'
-    path: '/repos/arvida/emoji-cheat-sheet.com/contents/public/graphics/emojis'
+    path: '/repos/arvida/emoji-cheat-sheet.com/contents/public/graphics/emojis' + if token? then "?access_token=#{token}" else ''
     headers: headers
   , (res) ->
     data = ''
