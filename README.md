@@ -47,8 +47,8 @@ So this has become way more customizable (up to passing own parser-function) and
    + `options` (default: `{}`) - The options to use for parsing:
      * `list`: A list of emoji to overwrite default one.
      * `parser`: A Parser ([see below](#parser)) to replace the default parser.
-     * `classes`: A String of the content for the `class`-attribute of the `img`-tag (with default parser).
-     * `attributes` (default: `{'title':function(name){return name;}, 'alt':function(name){return ':'+name+':';}}`): An object of attributes and their values to add to the `img`-tag (with default parser).
+     * `classes`: A String of the content for the `class`-attribute of the `img`-tag (default parser).
+     * `attributes` (default: `{'title':function(match,name,parameter){if (parameter != null) return parameter + " (" + name + ")"; else return name;}, 'alt':function(match){return match;}}`): An object of attributes and their value-producing function (gets passed matching string, emoji-name and parameter (if any): `":smiley[parameter]:", "smiley", "parameter"`). The attributes get added to the `img`-tag with the generated values (default parser).
    + Returns the text with parsed emoji.
 
  * `[String] emojiParser.parse(text, url, parser)` replaces all emoji-occurrences within given text, using given parser.
@@ -73,9 +73,8 @@ If you use `require.js` or similar frameworks you can use it to get the module, 
    + `options` (default: `{}`) - The options to use for parsing:
      * `list`: A list of emoji to overwrite default one.
      * `parser`: A Parser ([see below](#parser)) to replace the default parser.
-     * `classes`: A String of the content for the `class`-attribute of the `img`-tag (with default parser).
-     * `attributes` (default: `{'title':function(name){return name;}, 'alt':function(name){return ':'+name+':';}}`): An object of attributes and their values to add to the `img`-tag (with default parser).
-   + Returns the text with parsed emoji.
+     * `classes`: A String of the content for the `class`-attribute of the `img`-tag (default parser).
+     * `attributes` (default: `{'title':function(match,name,parameter){if (parameter != null) return parameter + " (" + name + ")"; else return name;}, 'alt':function(match){return match;}}`): An object of attributes and their value-producing function (gets passed matching string, emoji-name and parameter (if any): `":smiley[parameter]:", "smiley", "parameter"`). The attributes get added to the `img`-tag with the generated values (default parser).
 
  * `[String] emojiParser(text, url, parser)` replaces all emoji-occurrences within given text, using given parser.
    + `text` - The text to parse.
@@ -91,7 +90,7 @@ If you use `require.js` or similar frameworks you can use it to get the module, 
 
 A parser is just a function that gets called for each emoji-occurrence with the following parameters:
 
- 1. `[String] name` - The name of the emoji to parse.
+ 1. `[Array] match` - An array containing the string that gets interpreted as emoji, the name of the emoji and the parameter for the emoji (if any)
  2. `[String] url` - The base-URL that got passed to `emojiParser.parse`-function.
  3. `[String] classes` - The classes the `img`-tag should use.
  4. `[Object] options` - The options that get used by the `emojiParser.parse`-function.
@@ -108,15 +107,15 @@ The return-value will replace the emoji-occurrence.
     emoji.init().update();
     
     // calls to http://example.com/emoji/images/*.png should resolve to path/to/node_modules/emoji-parser/emoji/*.png
-    emoji.parse('This is a :telephone:', 'http://example.com/emoji/images');
-    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' />
+    emoji.parse('This is a :telephone: :smiley[:D]:', 'http://example.com/emoji/images');
+    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' /> <img class='emoji' src='http://example.com/emoji/images/smiley.png' title=':D (smiley)' alt=':smiley[:D]:' />
 
 #### bower
 
     var emoji = require ? require('emoji-parser') : window.emojiParser;
     
-    emoji('This is a :telephone:', 'http://example.com/emoji/images');
-    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' />
+    emoji('This is a :telephone: :smiley[:D]:', 'http://example.com/emoji/images');
+    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' /> <img class='emoji' src='http://example.com/emoji/images/smiley.png' title=':D (smiley)' alt=':smiley[:D]:' />
 
 ## Installation
 
