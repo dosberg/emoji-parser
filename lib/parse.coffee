@@ -3,8 +3,8 @@ DEFAULT_ATTRIBUTES =
   alt: (match) -> match
 DEFAULT_CLASSES = 'emoji'
 DEFAULT_PARSER = (match, url, classes, options) ->
-  res = "<img class='#{classes}' src='#{url}/#{encodeURIComponent match[1]}.png' "
-  res += "#{key}='#{val.apply(options, match)}' " for key, val of options.attributes
+  res = "<img class=\"#{classes}\" src=\"#{url}/#{encodeURIComponent match[1]}.png\" "
+  res += "#{key}=\"#{val.apply(options, match)}\" " for key, val of options.attributes
   res + '/>'
 TEST_REGEX = /\:([a-z0-9_+-]+)(?:\[((?:[^\]]|\][^:])*\]?)\])?\:/g
 
