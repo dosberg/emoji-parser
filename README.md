@@ -108,14 +108,14 @@ The return-value will replace the emoji-occurrence.
     
     // calls to http://example.com/emoji/images/*.png should resolve to path/to/node_modules/emoji-parser/emoji/*.png
     emoji.parse('This is a :telephone: :smiley[:D]:', 'http://example.com/emoji/images');
-    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' /> <img class='emoji' src='http://example.com/emoji/images/smiley.png' title=':D (smiley)' alt=':smiley[:D]:' />
+    // This is a <img class="emoji" src="http://example.com/emoji/images/telephone.png" title="telephone" alt=":telephone:" /> <img class="emoji" src="http://example.com/emoji/images/smiley.png" title=":D (smiley)" alt=":smiley[:D]:" />
 
 #### bower
 
     var emoji = require ? require('emoji-parser') : window.emojiParser;
     
     emoji('This is a :telephone: :smiley[:D]:', 'http://example.com/emoji/images');
-    // This is a <img class='emoji' src='http://example.com/emoji/images/telephone.png' title='telephone' alt=':telephone:' /> <img class='emoji' src='http://example.com/emoji/images/smiley.png' title=':D (smiley)' alt=':smiley[:D]:' />
+    // This is a <img class="emoji" src="http://example.com/emoji/images/telephone.png" title="telephone" alt=":telephone:" /> <img class="emoji" src="http://example.com/emoji/images/smiley.png" title=":D (smiley)" alt=":smiley[:D]:" />
 
 ## Installation
 
