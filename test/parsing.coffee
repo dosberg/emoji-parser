@@ -22,6 +22,11 @@ module.exports = start: (done) ->
     '"' + url + '/' + match[1] + '.png' + '"'
   assert result == 'This is a "http://example.com/emoji/images/+1.png", this a "http://example.com/emoji/images/-1.png"'
 
+  # try newlines
+  result = app.parse 'This\n\ncontains :grinning:\r\nlinebreaks\n', 'http://example.com/emoji/images'
+  assert result == 'This\n\ncontains <img class="emoji" src="http://example.com/emoji/images/grinning.png"
+title="grinning" alt=":grinning:" />\r\nlinebreaks\n'
+
   # lets try to change the list.
   result = app.parse 'This is a :+1:, this a :-1:', 'http://example.com/emoji/images', list: []
   assert result == 'This is a :+1:, this a :-1:'
