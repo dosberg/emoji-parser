@@ -10,7 +10,7 @@ fetchImage = (target, path, name, cb) ->
     return cb name if bool
     req = https.get
       hostname: 'raw.githubusercontent.com'
-      path: "/arvida/emoji-cheat-sheet.com/master/#{path}"
+      path: "/WebpageFX/emoji-cheat-sheet.com/master/#{path}"
       headers: headers
     , (res) ->
       data = ''
@@ -46,7 +46,7 @@ module.exports = (dir, remain, token, cb) ->
   wrench.mkdirSyncRecursive dir
   req = https.get
     hostname: 'api.github.com'
-    path: '/repos/arvida/emoji-cheat-sheet.com/contents/public/graphics/emojis' + if token? then "?access_token=#{token}" else ''
+    path: '/repositories/2592600/contents/public/graphics/emojis' + if token? then "?access_token=#{token}" else ''
     headers: headers
   , (res) ->
     data = ''
